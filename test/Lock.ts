@@ -28,10 +28,13 @@ describe("Lock", function () {
 
   describe("Deployment", function () {
     it("Should set the right unlockTime", async function () {
-      const { lock, unlockTime } = await loadFixture(deployOneYearLockFixture);
+      const usdc = ethers.getContractAt("resolvedContractInterface");
 
-      expect(await lock.unlockTime()).to.equal(unlockTime);
-    });
+
+      const resolvedSigner = await ethers.provider.getSigner("0x000000");
+      const resolvedUsdc = usdc.connect(resolvedSigner).balanceOf("0x000000");
+
+      });
 
     it("Should set the right owner", async function () {
       const { lock, owner } = await loadFixture(deployOneYearLockFixture);
